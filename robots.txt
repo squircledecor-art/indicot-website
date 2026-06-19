@@ -1,4 +1,0 @@
-User-agent: *
-Allow: /
-
-Sitemap: https://indiacot.com/sitemap.xml
