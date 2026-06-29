@@ -1,0 +1,40 @@
+/* ============================================================
+   INDIACOT — Cinematic layer: intro loader · scroll reveals · scroll cue
+   ============================================================ */
+
+/* ---------- INTRO SPLASH (smooth logo reveal · no countdown) ---------- */
+.splash{position:fixed;inset:0;z-index:9999;background:var(--bg);
+  display:flex;flex-direction:column;align-items:center;justify-content:center;gap:22px;
+  transition:opacity .7s ease;will-change:opacity;}
+.splash.gone{opacity:0;pointer-events:none;}
+.splash-logo{height:62px;width:auto;animation:splashLogo 1s cubic-bezier(.2,.8,.2,1) both;}
+@keyframes splashLogo{
+  from{opacity:0;transform:translateY(12px) scale(.98);filter:blur(2px);}
+  to{opacity:1;transform:none;filter:none;}
+}
+.splash-line{width:0;height:2px;background:var(--metal-gold,linear-gradient(90deg,#c9a14a,#b07d12));
+  border-radius:2px;animation:splashLine 1.1s .25s cubic-bezier(.7,0,.2,1) both;}
+@keyframes splashLine{from{width:0;}to{width:min(220px,46vw);}}
+body.splash-lock{overflow:hidden;height:100svh;}
+@media(prefers-reduced-motion:reduce){
+  .splash-logo,.splash-line{animation-duration:.01s;}
+}
+
+/* ---------- SCROLL REVEALS ---------- */
+.reveal{opacity:0;transform:translateY(30px);transition:opacity 1s cubic-bezier(.2,.8,.2,1),transform 1.1s cubic-bezier(.2,.8,.2,1);will-change:opacity,transform;}
+.reveal.in{opacity:1;transform:none;}
+.reveal-d1{transition-delay:.08s;}
+.reveal-d2{transition-delay:.16s;}
+.reveal-d3{transition-delay:.24s;}
+.reveal-d4{transition-delay:.32s;}
+@media(prefers-reduced-motion:reduce){
+  .reveal{opacity:1!important;transform:none!important;transition:none!important;}
+}
+
+/* ---------- SCROLL CUE ---------- */
+.scroll-cue{position:absolute;left:var(--gut);bottom:40px;z-index:3;display:flex;align-items:center;gap:16px;
+  font-family:var(--label);font-size:11px;font-weight:600;letter-spacing:.22em;text-transform:uppercase;color:rgba(255,255,255,.7);}
+.scroll-cue .ln{width:54px;height:1px;background:linear-gradient(90deg,rgba(255,255,255,.4),transparent);position:relative;overflow:hidden;}
+.scroll-cue .ln::after{content:"";position:absolute;left:-50%;top:0;height:100%;width:50%;background:var(--accent);animation:cueRun 2.2s cubic-bezier(.7,0,.3,1) infinite;}
+@keyframes cueRun{0%{left:-50%;}60%,100%{left:100%;}}
+@media(max-width:680px){.scroll-cue{display:none;}}
