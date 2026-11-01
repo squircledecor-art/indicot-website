@@ -174,7 +174,7 @@ function calc(){
   $('prof').textContent=money(profMo);
   $('profy').textContent=money(profYr);
 
-  if(!isFinite(months)||months<=0){ $('payback').innerHTML='—'; }
+  if(!isFinite(months)||months<=0){ $('payback').innerHTML='<span style="font-size:17px;font-weight:600;color:rgba(255,255,255,.7)">Enter your numbers above to see the payback ↑</span>'; }
   else if(months<1){ $('payback').innerHTML='Under a month'; }
   else if(months<=36){
     const m=Math.round(months);
