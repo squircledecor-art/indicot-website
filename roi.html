@@ -1,0 +1,198 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Finishing ROI Calculator — Indiacot Print Finishing Machinery</title>
+<meta name="description" content="See what print finishing could add to your business — enter your volumes and get the extra profit and machine payback time. Foiling, Spot UV, Cast & Cure, lamination. Indiacot, Rajkot.">
+<link rel="canonical" href="https://indiacot.com/roi.html">
+<link rel="icon" href="/assets/favicon.ico" sizes="any">
+<link rel="icon" type="image/png" sizes="32x32" href="/assets/favicon-32x32.png">
+<link rel="icon" type="image/png" sizes="16x16" href="/assets/favicon-16x16.png">
+<link rel="apple-touch-icon" sizes="180x180" href="/assets/apple-touch-icon.png">
+<meta name="robots" content="index, follow">
+<meta property="og:title" content="Finishing ROI Calculator — Indiacot">
+<meta property="og:description" content="Enter your volumes, see the extra profit and how fast an Indiacot finishing machine pays for itself.">
+<meta property="og:url" content="https://indiacot.com/roi.html">
+<meta property="og:image" content="https://indiacot.com/assets/prod-castcure.jpg">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Hanken+Grotesk:wght@400;500;600;700;800&family=IBM+Plex+Mono:wght@500;600&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --sans:"Hanken Grotesk",system-ui,-apple-system,sans-serif;
+    --mono-f:"IBM Plex Mono",ui-monospace,monospace;
+    --navy:#1E1B6C; --navy2:#2a2694; --cream:#f4f0e8; --ink:#1a1a2e;
+    --gold:#F7B500; --green:#009640; --line:rgba(30,27,108,.12); --muted:#6b6b80;
+  }
+  *{box-sizing:border-box;margin:0;padding:0}
+  body{font-family:var(--sans);background:var(--cream);color:var(--ink);min-height:100vh;
+    display:flex;flex-direction:column;-webkit-font-smoothing:antialiased}
+  .topbar{display:flex;align-items:center;justify-content:space-between;padding:15px 30px;
+    background:rgba(244,240,232,.92);backdrop-filter:blur(8px);border-bottom:1px solid var(--line);position:sticky;top:0;z-index:10}
+  .topbar .lg img{height:30px;display:block}
+  .topbar nav{display:flex;align-items:center;gap:24px}
+  .topbar nav a{color:var(--navy);text-decoration:none;font-size:13.5px;font-weight:600}
+  .topbar nav a:hover{color:var(--gold)}
+  .topbar .ph{font-family:var(--mono-f);font-size:13px}
+  .main{flex:1;display:flex;align-items:center;justify-content:center;padding:36px 24px}
+  @media(max-width:620px){.topbar nav a:not(.ph){display:none}.topbar{padding:12px 18px}.main{padding:22px 16px}}
+  .wrap{width:100%;max-width:760px}
+  .card{background:#fff;border-radius:24px;padding:38px 36px 32px;position:relative;overflow:hidden;
+    box-shadow:0 30px 80px -30px rgba(30,27,108,.35),0 2px 8px rgba(30,27,108,.06)}
+  .card::before{content:"";position:absolute;top:0;left:0;right:0;height:5px;
+    background:linear-gradient(90deg,var(--gold) 0%,var(--gold) 40%,#fff 40%,#fff 46%,var(--green) 46%)}
+  .eyebrow{font-family:var(--mono-f);font-size:11px;font-weight:600;letter-spacing:2px;text-transform:uppercase;
+    color:var(--gold);margin:10px 0 8px;display:flex;align-items:center;gap:8px}
+  .eyebrow .dot{width:6px;height:6px;border-radius:50%;background:var(--green)}
+  h1{font-size:25px;line-height:1.18;color:var(--navy);margin-bottom:6px;letter-spacing:-.4px}
+  .sub{color:var(--muted);font-size:14px;margin-bottom:22px;line-height:1.5}
+  .cur{display:inline-flex;background:var(--cream);border-radius:10px;padding:3px;margin-bottom:22px}
+  .cur button{border:none;background:none;font:inherit;font-weight:700;font-size:13px;color:var(--muted);
+    padding:7px 16px;border-radius:8px;cursor:pointer;transition:.15s}
+  .cur button.on{background:#fff;color:var(--navy);box-shadow:0 2px 6px rgba(30,27,108,.12)}
+  .field{margin-bottom:20px}
+  .field .lab{display:flex;justify-content:space-between;align-items:baseline;margin-bottom:9px}
+  .field .lab .t{font-weight:700;font-size:14px;color:var(--ink)}
+  .field .lab .v{font-family:var(--mono-f);font-weight:600;font-size:15px;color:var(--navy)}
+  input[type=range]{-webkit-appearance:none;appearance:none;width:100%;height:6px;border-radius:6px;
+    background:var(--line);outline:none}
+  input[type=range]::-webkit-slider-thumb{-webkit-appearance:none;appearance:none;width:22px;height:22px;
+    border-radius:50%;background:var(--navy);cursor:pointer;border:3px solid #fff;box-shadow:0 2px 8px rgba(30,27,108,.4)}
+  input[type=range]::-moz-range-thumb{width:22px;height:22px;border-radius:50%;background:var(--navy);
+    cursor:pointer;border:3px solid #fff;box-shadow:0 2px 8px rgba(30,27,108,.4)}
+  .num-field input{width:100%;font:inherit;font-size:16px;font-weight:600;color:var(--navy);padding:12px 14px;
+    border:1.5px solid var(--line);border-radius:11px;background:#fff}
+  .num-field input:focus{outline:none;border-color:var(--navy)}
+  .num-field .pre{position:relative}
+  .result{margin-top:8px;background:var(--navy);border-radius:18px;padding:26px 26px 24px;color:#fff;position:relative;overflow:hidden}
+  .result::after{content:"";position:absolute;right:-40px;top:-40px;width:160px;height:160px;border-radius:50%;background:rgba(247,181,0,.14)}
+  .result .pb-lab{font-family:var(--mono-f);font-size:11px;letter-spacing:1.5px;text-transform:uppercase;color:rgba(255,255,255,.7);margin-bottom:4px}
+  .result .pb{font-size:40px;font-weight:800;line-height:1;letter-spacing:-1px}
+  .result .pb small{font-size:18px;font-weight:600;color:rgba(255,255,255,.75)}
+  .result .grid{display:grid;grid-template-columns:1fr 1fr 1fr;gap:14px;margin-top:22px;position:relative;z-index:1}
+  .result .g .k{font-size:11px;color:rgba(255,255,255,.6);margin-bottom:4px;font-weight:600}
+  .result .g .n{font-size:17px;font-weight:700}
+  @media(max-width:560px){.result .grid{grid-template-columns:1fr;gap:12px}.result .pb{font-size:34px}}
+  .actions{display:flex;gap:11px;flex-wrap:wrap;margin-top:22px}
+  .btn{display:inline-flex;align-items:center;gap:8px;padding:13px 22px;border-radius:12px;font-weight:700;
+    font-size:14px;text-decoration:none;border:none;cursor:pointer;transition:.15s;font-family:inherit}
+  .btn-wa{background:var(--green);color:#fff}.btn-wa:hover{filter:brightness(1.07);transform:translateY(-2px)}
+  .btn-ghost{background:#fff;color:var(--navy);border:1.5px solid var(--line)}.btn-ghost:hover{border-color:var(--navy)}
+  .note{font-size:11.5px;color:var(--muted);line-height:1.5;margin-top:18px;font-style:italic}
+  .foot{text-align:center;color:var(--muted);font-size:11.5px;margin-top:20px}
+  .foot b{color:var(--navy)}
+</style>
+</head>
+<body>
+<header class="topbar">
+  <a class="lg" href="index.html"><img src="assets/indiacot-logo-trim.png" alt="Indiacot"></a>
+  <nav>
+    <a href="index.html#machines">Machines</a>
+    <a href="find.html">Find Your Machine</a>
+    <a href="index.html#enquire">Contact</a>
+    <a class="ph" href="tel:+919624186098">+91 96241 86098</a>
+  </nav>
+</header>
+<div class="main">
+<div class="wrap">
+  <div class="card">
+    <div class="eyebrow"><span class="dot"></span>ROI Calculator</div>
+    <h1>What could finishing add to your business?</h1>
+    <p class="sub">Enter your numbers — see the extra profit a finishing machine brings and how fast it pays for itself.</p>
+
+    <div class="cur">
+      <button data-cur="INR" class="on">₹ INR</button>
+      <button data-cur="USD">$ USD</button>
+    </div>
+
+    <div class="field">
+      <div class="lab"><span class="t">Sheets finished per month</span><span class="v" id="vSheets"></span></div>
+      <input type="range" id="sheets" min="5000" max="500000" step="5000" value="100000">
+    </div>
+    <div class="field">
+      <div class="lab"><span class="t">Extra you charge per sheet (premium)</span><span class="v" id="vPrem"></span></div>
+      <input type="range" id="prem" min="0.1" max="5" step="0.1" value="1">
+    </div>
+    <div class="field">
+      <div class="lab"><span class="t">Foil / consumable cost per sheet</span><span class="v" id="vCost"></span></div>
+      <input type="range" id="cost" min="0.05" max="2" step="0.05" value="0.2">
+    </div>
+    <div class="field num-field">
+      <div class="lab"><span class="t">Machine investment</span><span class="v" id="vInvLab"></span></div>
+      <div class="pre"><input type="number" id="inv" value="1500000" min="0" step="10000"></div>
+    </div>
+
+    <div class="result">
+      <div class="pb-lab">Machine pays for itself in</div>
+      <div class="pb" id="payback">—</div>
+      <div class="grid">
+        <div class="g"><div class="k">Added revenue / month</div><div class="n" id="rev">—</div></div>
+        <div class="g"><div class="k">Net profit / month</div><div class="n" id="prof">—</div></div>
+        <div class="g"><div class="k">Net profit / year</div><div class="n" id="profy">—</div></div>
+      </div>
+    </div>
+
+    <div class="actions">
+      <a class="btn btn-wa" id="waBtn" href="#" target="_blank" rel="noopener">Get exact numbers on WhatsApp</a>
+      <a class="btn btn-ghost" href="find.html">Find your machine →</a>
+    </div>
+
+    <p class="note">Indicative estimate from the figures you enter — not a quote. Real premium, consumable cost and output depend on your jobs and configuration. Ask us for exact numbers for your setup.</p>
+    <div class="foot">Print finishing machines · Rajkot, India · <b>800+ installations · 50+ countries</b></div>
+  </div>
+</div>
+</div>
+
+<script>
+const WA='919624186098';
+let cur='INR';
+const sym={INR:'₹',USD:'$'};
+const loc={INR:'en-IN',USD:'en-US'};
+const $=id=>document.getElementById(id);
+
+function money(n){
+  if(!isFinite(n)) n=0;
+  return sym[cur]+Math.round(n).toLocaleString(loc[cur]);
+}
+function perSheet(n){return sym[cur]+n.toFixed(2);}
+
+function calc(){
+  const sheets=+$('sheets').value, prem=+$('prem').value, cost=+$('cost').value, inv=+$('inv').value||0;
+  $('vSheets').textContent=sheets.toLocaleString(loc[cur]);
+  $('vPrem').textContent=perSheet(prem);
+  $('vCost').textContent=perSheet(cost);
+  $('vInvLab').textContent=money(inv);
+
+  const revMo=sheets*prem;
+  const costMo=sheets*cost;
+  const profMo=revMo-costMo;
+  const profYr=profMo*12;
+  const months=profMo>0?inv/profMo:Infinity;
+
+  $('rev').textContent=money(revMo);
+  $('prof').textContent=money(profMo);
+  $('profy').textContent=money(profYr);
+
+  if(!isFinite(months)||months<=0){ $('payback').innerHTML='—'; }
+  else if(months<1){ $('payback').innerHTML='Under a month'; }
+  else if(months<=36){
+    const m=Math.round(months);
+    $('payback').innerHTML=(m>=12?`${Math.floor(m/12)} yr ${m%12} mo `:'')+`<small>(${m} months)</small>`;
+  } else {
+    $('payback').innerHTML=`${(months/12).toFixed(1)} years <small>(${Math.round(months)} mo)</small>`;
+  }
+
+  const msg=`Hello Indiacot, I used your ROI calculator — about ${sheets.toLocaleString('en-IN')} sheets/month. I'd like exact numbers and a quote for a finishing machine.`;
+  $('waBtn').href=`https://wa.me/${WA}?text=`+encodeURIComponent(msg);
+}
+
+document.querySelectorAll('.cur button').forEach(b=>b.onclick=()=>{
+  document.querySelectorAll('.cur button').forEach(x=>x.classList.remove('on'));
+  b.classList.add('on'); cur=b.dataset.cur; calc();
+});
+['sheets','prem','cost','inv'].forEach(id=>$(id).addEventListener('input',calc));
+calc();
+</script>
+</body>
+</html>
