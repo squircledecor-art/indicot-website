@@ -106,9 +106,9 @@
       <button data-cur="USD">$ USD</button>
     </div>
 
-    <div class="field">
-      <div class="lab"><span class="t">Sheets finished per month</span><span class="v" id="vSheets"></span></div>
-      <input type="range" id="sheets" min="0" max="500000" step="1000" value="0">
+    <div class="field num-field">
+      <div class="lab"><span class="t">Sheets finished per month</span></div>
+      <div class="pre"><input type="number" id="sheets" value="0" min="0" step="1000" placeholder="e.g. 50000"></div>
     </div>
     <div class="field">
       <div class="lab"><span class="t">Extra you charge per sheet (premium)</span><span class="v" id="vPrem"></span></div>
@@ -158,8 +158,7 @@ function money(n){
 function perSheet(n){return sym[cur]+n.toFixed(2);}
 
 function calc(){
-  const sheets=+$('sheets').value, prem=+$('prem').value, cost=+$('cost').value, inv=+$('inv').value||0;
-  $('vSheets').textContent=sheets.toLocaleString(loc[cur]);
+  const sheets=+$('sheets').value||0, prem=+$('prem').value, cost=+$('cost').value, inv=+$('inv').value||0;
   $('vPrem').textContent=perSheet(prem);
   $('vCost').textContent=perSheet(cost);
   $('vInvLab').textContent=money(inv);
